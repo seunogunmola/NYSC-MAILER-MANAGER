@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\VendorController;
 
 /*
@@ -41,6 +42,14 @@ Route::middleware(['auth','role:admin'])->group(
         Route::get('/admin/dashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
         
         Route::get('/admin/logout',[AdminController::class,'logout'])->name('admin.logout');
+
+        #MAILS
+        //SHOW MAILS INDEX
+        Route::get('admin/mail/index',[MailController::class,'index'])->name('admin.mail.index');        
+        //SHOW MAIL CREATION FORM
+        Route::get('admin/mail/create',[MailController::class,'create'])->name('admin.mail.create');
+        //STORE MAIL
+        Route::post('admin/mail/store',[MailController::class,'store'])->name('admin.mail.store');
     }
 );
 

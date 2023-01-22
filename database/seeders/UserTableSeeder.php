@@ -22,25 +22,16 @@ class UserTableSeeder extends Seeder
                 [
                     'name'=>'Admin User',
                     'username'=>'admin',
-                    'email'=>'admin@teracommerce.com',
+                    'email'=>'admin@nmms.com',
                     'password'=>Hash::make('admin'),
                     'role'=>'admin',
-                    'status'=>'active',
-                ],
-                //VENDOR
-                [
-                    'name'=>'Vendor User',
-                    'username'=>'vendor',
-                    'email'=>'vendor@teracommerce.com',
-                    'password'=>Hash::make('vendor'),
-                    'role'=>'vendor',
                     'status'=>'active',
                 ],
                 //USER
                 [
                     'name'=>'Customer User',
                     'username'=>'user',
-                    'email'=>'user@teracommerce.com',
+                    'email'=>'user@nmms.com',
                     'password'=>Hash::make('user'),
                     'role'=>'user',
                     'status'=>'active',

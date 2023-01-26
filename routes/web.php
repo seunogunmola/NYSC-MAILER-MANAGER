@@ -18,7 +18,8 @@ use App\Http\Controllers\VendorController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $pageTitle = 'Login';
+    return view('/admin/login',compact('pageTitle'));
 });
 
 Route::get('/dashboard', function () {

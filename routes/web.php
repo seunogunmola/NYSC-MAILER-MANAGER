@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\VendorController;
 
@@ -22,9 +23,7 @@ Route::get('/', function () {
     return view('/admin/login',compact('pageTitle'));
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',[DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -45,12 +44,23 @@ Route::middleware(['auth','role:admin'])->group(
         Route::get('/admin/logout',[AdminController::class,'logout'])->name('admin.logout');
 
         #MAILS
+        Route::controller(MailController::class)->group(
+            function(){
+                // EDIT MAIL 
+                Route::get('/admin/mail/edit/{uniqueid}','edit')->name('admin.mail.edit');
+
+                // UPDATE MAIL
+                Route::post('/admin/mail/update/{id}','update')->name('admin.mail.update'); 
+            }
+        );
         //SHOW MAILS INDEX
         Route::get('admin/mail/index',[MailController::class,'index'])->name('admin.mail.index');        
         //SHOW MAIL CREATION FORM
         Route::get('admin/mail/create',[MailController::class,'create'])->name('admin.mail.create');
         //STORE MAIL
         Route::post('admin/mail/store',[MailController::class,'store'])->name('admin.mail.store');
+
+        
     }
 );
 

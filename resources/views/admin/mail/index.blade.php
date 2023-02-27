@@ -25,11 +25,14 @@
                             <tr>
                                 <th>#</th>
                                 <th>Sender</th>
+                                <th>Subject</th>
                                 <th>Description</th>
                                 <th>Destination</th>
+                                <th>Category</th>
                                 <th>Date</th>
                                 <th>File</th>
                                 <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,11 +40,26 @@
                                 <tr>
                                     <td>{{ $index+1 }}</td>
                                     <td>{{ $mail->sender }}</td>
+                                    <td> <a href="{{ asset($mail->file) }}" target="_blank">{{ $mail->subject }}</a></td>
                                     <td>{{ $mail->description }}</td>
+                                    <td>{{ $categories[$mail->category] }}</td>
                                     <td>{{ $mail->destination }}</td>
                                     <td>{{ $mail->date }}</td>
-                                    <td> <a href="{{ asset($mail->file) }}" class="bx bx-download" target="blank"></a></td>
+                                    <td> <a href="{{ asset($mail->file) }}" class="bx bx-envelope-open" title="View Mail" target="blank"></a></td>
                                     <td>{{ $mail->status == 0 ? "Pending" : "Read" }}</td>
+                                    <td>
+                                        <div class="dropdown">
+											<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Action</button>
+											<ul class="dropdown-menu" style="margin: 0px;">
+												<li><a class="dropdown-item" href="{{ asset($mail->file) }}" target="_blank">View Mail</a>
+												</li>
+												<li><a class="dropdown-item" href="{{ route('admin.mail.edit',$mail->uniqueid)}}">Edit Mail</a>
+												</li>
+												<li><a class="dropdown-item" href="#">Something else here</a>
+												</li>
+											</ul>
+										</div>                                        
+                                    </td>
                                 </tr>                                
                             @endforeach
                         </tbody>
@@ -51,9 +69,11 @@
                                 <th>Sender</th>
                                 <th>Description</th>
                                 <th>Destination</th>
+                                <th>Category</th>
                                 <th>Date</th>
                                 <th>File</th>
                                 <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>

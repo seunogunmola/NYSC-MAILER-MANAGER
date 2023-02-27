@@ -15,9 +15,12 @@ return new class extends Migration
     {
         Schema::create('mails', function (Blueprint $table) {
             $table->id();
+            $table->string('uniqueid');
             $table->string('sender');
-            $table->text('description');
+            $table->text('subject');            
+            $table->text('description');            
             $table->string('destination');
+            $table->string('category');
             $table->date('date');
             $table->text('file');
             $table->integer('received_by');

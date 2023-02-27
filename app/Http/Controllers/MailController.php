@@ -10,6 +10,25 @@ class MailController extends Controller
 {
     public $resource = "Mail";
 
+    public $categories = [
+        'private'=>'Private',
+        'government'=>'Government',
+        'government'=>'Government',
+        'ndhq'=>'Internal-NDHQ',
+        'state_office'=>'Internal-State Office',
+        'area_office'=>'Internal-Area Office',
+    ];
+
+    public  $rules = [
+        'sender'=>'string|required',
+        'subject'=>'string|required',
+        'description'=>'string|required',
+        'destination'=>'string|required',
+        'category'=>'string|required',
+        'date'=>'date|required',
+        'file'=>'file',
+    ];
+
     public function index()
     {
         #SET PAGE TITLE    
@@ -17,10 +36,11 @@ class MailController extends Controller
         $resource = $this->resource;
         $pageTitle = $resource.' | '.$action;
 
+        $categories = $this->categories;
         #GET MAIL
         $mails = Mail::all();
 
-        return view('admin.mail.index',compact('resource','action','pageTitle','mails'));
+        return view('admin.mail.index',compact('resource','action','pageTitle','mails','categories'));
     }
 
     /**
@@ -31,8 +51,8 @@ class MailController extends Controller
     public function create()
     {
         $pageTitle = "Create Mail";
-
-        return view('admin.mail.create',compact('pageTitle'));    
+        $categories = $this->categories;
+        return view('admin.mail.create',compact('pageTitle','categories'));    
     }
 
     /**
@@ -43,21 +63,18 @@ class MailController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'sender'=>'string|required',
-            'description'=>'string|required',
-            'destination'=>'string|required',
-            'date'=>'date|required',
-            'file'=>'file',
-        ];
+        $rules = $this->rules;
 
         $validated = $request->validate($rules);
 
         if($validated){
             $mail_data = [
+                'uniqueid'=>str()->random(7),
                 'sender'=>$request->sender,
+                'subject'=>$request->subject,
                 'description'=>$request->sender,
                 'destination'=>$request->sender,
+                'category'=>$request->category,
                 'date'=>$request->date,
                 'received_by'=>Auth::user()->id,
                 'status'=>'0'
@@ -108,9 +125,18 @@ class MailController extends Controller
      * @param  \App\Models\Mail  $mail
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mail $mail)
-    {
-        //
+    public function edit($uniqueid)
+    {        
+        //GET MAIL
+        $mail = Mail::where('uniqueid',$uniqueid)->first();
+        if($mail){
+            $pageTitle = "Edit Mail : ".$mail->description;
+            $categories = $this->categories;
+            return view('admin.mail.edit',compact('pageTitle','categories','mail'));           
+        }
+        else{
+            return redirect()->route('admin.mail.index');
+        }
     }
 
     /**
@@ -120,9 +146,53 @@ class MailController extends Controller
      * @param  \App\Models\Mail  $mail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mail $mail)
+    public function update(Request $request, $id)
     {
-        //
+        $mail = Mail::findOrFail($id);
+        
+        $rules = $this->rules;
+
+        $validated = $request->validate($rules);
+
+        if($validated){
+            $mail_data = [
+                'sender'=>$request->sender,                
+                'subject'=>$request->subject,
+                'description'=>$request->sender,
+                'destination'=>$request->sender,
+                'category'=>$request->category,
+                'date'=>$request->date,
+                'updated_by'=>Auth::user()->id,
+                'updated_at'=>date('Y-m-d h:i:s'),
+                'status'=>'0'
+            ];
+            
+            if($uploadedFile = $request->file){
+                $extention = $uploadedFile->getClientOriginalExtension();                
+                $filename = hexdec(uniqid()).'.'.$extention;                
+                $destination = 'uploads/';           
+
+                if($uploadedFile->move($destination,$filename)){
+                    $mail_data['file'] = $destination.$filename;
+                }
+            }
+            
+            if($mail->update($mail_data)){
+                $message = [
+                    'type'=>'success',
+                    'message'=>'Mail Updated Successfully'
+                ];
+
+                return redirect(route('admin.mail.index'))->with($message);
+            }
+            else{
+                return redirect()->back();
+            }
+            
+        }
+        else{
+            echo "validation errors";exit;
+        }        
     }
 
     /**

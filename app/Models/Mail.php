@@ -10,12 +10,15 @@ class Mail extends Model
     use HasFactory;
 
     protected $fillable = [
+        'subject',
+        'uniqueid',
         'sender',
         'description',
         'destination',
         'date',
         'file',
         'status',
-        'received_by'
+        'received_by',
+        'category'
     ];
 }

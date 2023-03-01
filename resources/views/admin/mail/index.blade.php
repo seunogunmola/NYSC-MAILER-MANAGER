@@ -41,9 +41,9 @@
                                     <td>{{ $index+1 }}</td>
                                     <td>{{ $mail->sender }}</td>
                                     <td> <a href="{{ asset($mail->file) }}" target="_blank">{{ $mail->subject }}</a></td>
-                                    <td>{{ $mail->description }}</td>
-                                    <td>{{ $categories[$mail->category] }}</td>
+                                    <td>{{ $mail->description }}</td>                                    
                                     <td>{{ $mail->destination }}</td>
+                                    <td>{{ $categories[$mail->category] }}</td>
                                     <td>{{ $mail->date }}</td>
                                     <td> <a href="{{ asset($mail->file) }}" class="bx bx-envelope-open" title="View Mail" target="blank"></a></td>
                                     <td>{{ $mail->status == 0 ? "Pending" : "Read" }}</td>
@@ -67,6 +67,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Sender</th>
+                                <th>Subject</th>
                                 <th>Description</th>
                                 <th>Destination</th>
                                 <th>Category</th>

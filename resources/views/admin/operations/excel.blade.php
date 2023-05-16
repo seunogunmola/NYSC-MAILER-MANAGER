@@ -8,12 +8,12 @@
         </div>
         <!--end breadcrumb-->
         <div class="row">
-            <div class="col-xl-12 mx-auto">                
+            <div class="col-xl-6">                
                 <div class="card">
                     
                     <div class="card-body">
                     <h6 class="mb-0 text-uppercase">{{ $pageTitle }}</h6>
-                <hr />                        
+                <hr/>                        
                     <!-- #All VALIDATION ERRORS -->
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -36,6 +36,19 @@
                             </div>
                         </form>
 
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">                
+                <div class="card">
+                    
+                    <div class="card-body">
+                    <h6 class="mb-0 text-uppercase">Sample Upload File</h6>
+                <hr/>                        
+                    <img src="{{ asset('templates/mail_upload_image.png') }}" style="width:100%;">   
+                    <br>
+                    <br>
+                    <a href="{{ asset('templates/mail_upload_excel.xlsx') }}" target="_blank" class="btn btn-success"> Download Sample File Template</a>
                     </div>
                 </div>
             </div>

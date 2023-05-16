@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Models\Category;
 use App\Models\Mail;
 
 class AdminController extends Controller
@@ -12,8 +13,9 @@ class AdminController extends Controller
     public function dashboard(){
         $pageTitle = "Admin Dashboard";
         $mails = Mail::count();
+        $categories = Category::count();
         
-        return view('admin.dashboard',compact('pageTitle','mails'));
+        return view('admin.dashboard',compact('pageTitle','mails','categories'));
     }
 
     public function login(){

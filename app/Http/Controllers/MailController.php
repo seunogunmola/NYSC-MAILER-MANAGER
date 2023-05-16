@@ -203,6 +203,7 @@ class MailController extends Controller
     {
         $mail = $mail->findOrFail($id);
         if($mail->delete()){
+            @unlink($mail->file);
             return redirect(route('admin.mail.index'))->with(['message'=>'Mail Deleted Successfully','type'=>'success']);
         }
         else{

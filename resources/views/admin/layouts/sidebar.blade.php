@@ -1,11 +1,11 @@
 <div class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header">
         <div>
-            <img src="{{ asset('assets/images/logo-icon.png') }}" class="logo-icon"
+            <img src="{{ asset(env('APP_LOGO') )}}" class="logo-icon"
                 alt="logo icon">
         </div>
         <div>
-            <h4 class="logo-text">Rukada</h4>
+            <h4 class="logo-text">{{ env('APP_ABBREVIATION') }}</h4>
         </div>
         <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
         </div>
@@ -55,6 +55,7 @@
                 <li> <a href="{{ route('admin.excel.upload') }}"><i class="bx bx-upload"></i>Upload from Excel</a> </li>                
             </ul>
         </li>
+        <li> <a href="{{ route('admin.logout') }}" onclick="return confirm('Are You Sure?')"><i class="bx bx-logout"></i>Logout</a> </li>                
     </ul>
     <!--end navigation-->
 </div>

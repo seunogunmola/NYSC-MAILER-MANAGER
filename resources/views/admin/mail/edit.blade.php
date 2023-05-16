@@ -43,10 +43,10 @@
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Category</label>
-                                <select name="category" id="" class="form-select" required>
+                                <select name="category_id" id="" class="form-select" required>
                                     <option value="">Select Option</option>
-                                    @foreach ($categories as $key=>$value)
-                                        <option {{ $key==$mail->category ? "selected" : "" }} value="{{ $key }}">{{ $value }}</option>
+                                    @foreach ($categories as $category)
+                                        <option {{ $category->id == $mail->category_id ? "selected" : "" }} value="{{ $category->id }}">{{ $category->category_name }}</option>
                                     @endforeach
                                 </select>
                             </div>

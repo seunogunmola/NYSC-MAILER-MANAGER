@@ -3,8 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\OperationController;
 use App\Http\Controllers\VendorController;
 
 /*
@@ -51,20 +53,50 @@ Route::middleware(['auth','role:admin'])->group(
 
                 // UPDATE MAIL
                 Route::post('/admin/mail/update/{id}','update')->name('admin.mail.update'); 
+
+                Route::get('admin/mail/index','index')->name('admin.mail.index');        
+                //SHOW MAIL CREATION FORM
+                Route::get('admin/mail/create','create')->name('admin.mail.create');
+                //STORE MAIL
+                Route::post('admin/mail/store','store')->name('admin.mail.store');     
+                
+                Route::get('/admin/mail/delete/{id}','destroy')->name('admin.mail.delete');
             }
         );
-        //SHOW MAILS INDEX
-        Route::get('admin/mail/index',[MailController::class,'index'])->name('admin.mail.index');        
-        //SHOW MAIL CREATION FORM
-        Route::get('admin/mail/create',[MailController::class,'create'])->name('admin.mail.create');
-        //STORE MAIL
-        Route::post('admin/mail/store',[MailController::class,'store'])->name('admin.mail.store');
+
+        #CATEGORIES
+        Route::controller(CategoryController::class)->group(
+            function(){
+                Route::get('/admin/category/list','index')->name('admin.category.list');
+                Route::get('/admin/category/create','create')->name('admin.category.create');
+                Route::post('/admin/category/store','store')->name('admin.category.store');
+                Route::get('/admin/category/edit/{uniqueid}','edit')->name('admin.category.edit');
+                Route::get('/admin/category/delete/{id}','destroy')->name('admin.category.delete');
+                
+            }
+        );
+
+
+        #OPERATONS
+        Route::controller(OperationController::class)->group(
+            function(){
+                Route::get('/admin/operations/upload','excel')->name('admin.excel.upload');
+                Route::post('/admin/operation/storeExcel','storeExcel')->name('admin.excel.store');
+            }
+        );
+
 
         
     }
 );
 
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');
+
+Route::controller(AdminController::class)->group(
+    function(){
+        Route::get('/import','import');
+    }
+);
 
 //VENDOR
 Route::middleware(['auth','role:vendor'])->group(

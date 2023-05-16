@@ -1,43 +1,60 @@
 <div class="sidebar-wrapper" data-simplebar="true">
-			<div class="sidebar-header">
-				<div>
-					<img src="{{ asset('admin/images/logo.png') }}" class="logo-icon" alt="logo icon">
-				</div>
-				<div>
-					<h4 class="logo-text">{{ env('APP_ABBREVIATION') }}</h4>
-				</div>
-				<div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
-				</div>
-			</div>
-			<!--navigation-->
-			<ul class="metismenu" id="menu">
-				<li>
-					<a class="dropdown-item" href="{{ route('admin.dashboard') }}">
-						<div class="parent-icon"><i class="bx bx-home-circle"></i>
-						</div>
-						<div class="menu-title">Dashboard</div>
-					</a>
-				</li>	
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='bx bx-envelope'></i>
-						</div>
-						<div class="menu-title">Mails</div>
-					</a>
-					<ul>
-					<li> <a href="{{ route('admin.mail.index') }}"><i class="bx bx-right-arrow-alt"></i>View Mails</a></li>
-						<li> <a href="{{ route('admin.mail.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Mail</a></li>						
-					</ul>
-				</li>				
-				
-				
-
-				<li>
-					<a onclick="return confirm('Are You Sure You want to Logout?') " class="dropdown-item" href="{{ route('admin.logout') }}">
-						<div class="parent-icon"><i class="bx bx-exit"></i>
-						</div>
-						<div class="menu-title">Logout</div>
-					</a>
-				</li>				
-			</ul>
-		</div>
+    <div class="sidebar-header">
+        <div>
+            <img src="{{ asset('assets/images/logo-icon.png') }}" class="logo-icon"
+                alt="logo icon">
+        </div>
+        <div>
+            <h4 class="logo-text">Rukada</h4>
+        </div>
+        <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
+        </div>
+    </div>
+    <!--navigation-->
+    <ul class="metismenu" id="menu">
+        <li>
+            <a href="{{ route('admin.dashboard') }}">
+                <div class="parent-icon"><i class='bx bx-home'></i>
+                </div>
+                <div class="menu-title">Dashboard</div>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-envelope'></i>
+                </div>
+                <div class="menu-title">Mails</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('admin.mail.create') }}"><i
+                            class="bx bx-right-arrow-alt"></i>Add Mail</a>
+                </li>
+                <li> <a href="{{ route('admin.mail.index') }}"><i
+                            class="bx bx-right-arrow-alt"></i>View Mails</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-user'></i>
+                </div>
+                <div class="menu-title">Sender Categories</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('admin.category.list') }}"><i class="bx bx-right-arrow-alt"></i>View Categories</a> </li>
+                <li> <a href="{{ route('admin.category.create') }}"><i class="bx bx-right-arrow-alt"></i>Create Category</a> </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-slider-alt'></i>
+                </div>
+                <div class="menu-title">Operations</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('admin.excel.upload') }}"><i class="bx bx-upload"></i>Upload from Excel</a> </li>                
+            </ul>
+        </li>
+    </ul>
+    <!--end navigation-->
+</div>

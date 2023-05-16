@@ -13,18 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mails', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('uniqueid');
-            $table->string('sender');
-            $table->text('subject');            
-            $table->text('description');            
-            $table->string('destination');
-            $table->unsignedBigInteger('category_id');
-            $table->string('date');
-            $table->text('file');
-            $table->integer('received_by');
-            $table->enum('status',['0','1']);
+            $table->string('category_name');
+            $table->enum('status',[1 ,0]);
+            $table->unsignedBigInteger('created_by');
             $table->timestamps();
         });
     }
@@ -36,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mails');
+        Schema::dropIfExists('categories');
     }
 };

@@ -2,32 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class MailController extends Controller
 {
     public $resource = "Mail";
 
-    public $categories = [
-        'private'=>'Private',
-        'government'=>'Government',
-        'government'=>'Government',
-        'ndhq'=>'Internal-NDHQ',
-        'state_office'=>'Internal-State Office',
-        'area_office'=>'Internal-Area Office',
-    ];
+    public $categories;
 
     public  $rules = [
         'sender'=>'string|required',
         'subject'=>'string|required',
         'description'=>'string|required',
         'destination'=>'string|required',
-        'category'=>'string|required',
+        'category_id'=>'string|required',
         'date'=>'date|required',
         'file'=>'file',
     ];
+
+    public function __construct()
+    {
+        $this->categories = Category::all();
+    }
 
     public function index()
     {
@@ -74,7 +74,7 @@ class MailController extends Controller
                 'subject'=>$request->subject,
                 'description'=>$request->sender,
                 'destination'=>$request->sender,
-                'category'=>$request->category,
+                'category_id'=>$request->category_id,
                 'date'=>$request->date,
                 'received_by'=>Auth::user()->id,
                 'status'=>'0'
@@ -160,13 +160,11 @@ class MailController extends Controller
                 'subject'=>$request->subject,
                 'description'=>$request->sender,
                 'destination'=>$request->sender,
-                'category'=>$request->category,
+                'category_id'=>$request->category_id,
                 'date'=>$request->date,
                 'updated_by'=>Auth::user()->id,
                 'updated_at'=>date('Y-m-d h:i:s'),
-                'status'=>'0'
             ];
-            
             if($uploadedFile = $request->file){
                 $extention = $uploadedFile->getClientOriginalExtension();                
                 $filename = hexdec(uniqid()).'.'.$extention;                
@@ -201,8 +199,14 @@ class MailController extends Controller
      * @param  \App\Models\Mail  $mail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mail $mail)
+    public function destroy(Mail $mail,$id)
     {
-        //
+        $mail = $mail->findOrFail($id);
+        if($mail->delete()){
+            return redirect(route('admin.mail.index'))->with(['message'=>'Mail Deleted Successfully','type'=>'success']);
+        }
+        else{
+            return back()->with(['message'=>'An Error Occured','type'=>'error']);
+        }
     }
 }

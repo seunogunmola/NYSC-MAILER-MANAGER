@@ -68,7 +68,7 @@
                         <tr>
                             <th>#</th>
                             <th>Sender</th>
-                            <th>Subject</th>
+                            <th style="width:50px;">Subject</th>
                             <!-- <th>Description</th> -->
                             <th>Destination</th>
                             <th>Category</th>
@@ -83,7 +83,11 @@
                         <tr>
                             <td>{{ $index+1 }}</td>
                             <td>{{ $mail->sender }}</td>
-                            <td> <a href="{{ asset($mail->file) }}" target="_blank">{{ $mail->subject }}</a></td>
+                            <td> 
+                                <a href="{{ route('admin.mail.view',$mail->uniqueid) }}" target="_blank">
+                                    {{ substr($mail->subject,0,50) }}...
+                                </a>
+                            </td>
                             <!-- <td>{{ $mail->description }}</td>                                     -->
                             <td>{{ $mail->destination->destination_name }}</td>
                             <td>{{ $mail->category->category_name }}</td>

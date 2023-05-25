@@ -67,9 +67,9 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        //
+
     }
 
     /**
@@ -78,9 +78,11 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($uniqueid)
     {
-        //
+        $category = Category::where('uniqueid',$uniqueid)->first();
+        $pageTitle = "Editing Category : ".$category->category_name;
+        return view('admin.category.edit',compact('pageTitle','category'));        
     }
 
     /**
@@ -90,9 +92,26 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $category =  Category::findOrFail($id);
+        $request->validate([
+            'category_name'=>'string|required'
+        ]);
+
+        $data = [
+            'category_name'=>$request->category_name,
+            'status'=>$request->status,
+        ];
+
+        if($category->update($data)){
+            $message = ['message'=>'Category Updated Successfully','type'=>'success'];    
+            return redirect()->route('admin.category.list')->with($message);
+        }
+        else{
+            $message = ['message'=>'An Error Occured','type'=>'error'];
+            return back()->with($message);
+        }        
     }
 
     /**

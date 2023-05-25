@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/semi-dark.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/header-colors.css') }}" />
     <link href="{{ asset('assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
-    <title>{{ env('APP_NAME') }}</title>
+    <title>@yield('pageTitle')</title>
 </head>
 
 <body>

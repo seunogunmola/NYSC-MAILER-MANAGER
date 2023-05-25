@@ -1,4 +1,5 @@
 @extends('admin.layouts.main')
+@section('pageTitle',$pageTitle)
 @section('content')
 <!--start page wrapper -->
     <div class="page-content">

@@ -65,9 +65,6 @@
             <ul>
                 <li> <a href="{{ route('admin.excel.upload') }}"><i class="bx bx-upload"></i>Upload from Excel</a> </li>                
             </ul>
-            <ul>
-                <li> <a href="{{ route('admin.database.backup') }}"><i class="bx bx-upload"></i>Backup Database</a> </li>                
-            </ul>
         </li>
         <li> <a href="{{ route('admin.logout') }}" onclick="return confirm('Are You Sure?')"><i class="bx bx-logout"></i>Logout</a> </li>                
     </ul>

@@ -29,8 +29,8 @@ class MailController extends Controller
 
     public function __construct()
     {
-        $this->categories = Category::all();
-        $this->destinations = Destination::all();
+        $this->categories = Category::all()->sortBy('category_name');
+        $this->destinations = Destination::all()->sortBy('destination_name');
     }
 
     public function index(Request $request)

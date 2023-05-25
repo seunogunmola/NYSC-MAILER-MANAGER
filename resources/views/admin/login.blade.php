@@ -9,17 +9,17 @@
         <link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
         <!--plugins-->
         <link
-            href="{{ asset('admin/simplebar/css/simplebar.css" rel="stylesheet') }}" />
-        <link href="{{ asset('admin/perfect-scrollbar/css/perfect-scrollbar.css') }}"
+            href="{{ asset('assets/simplebar/css/simplebar.css" rel="stylesheet') }}" />
+        <link href="{{ asset('assets/perfect-scrollbar/css/perfect-scrollbar.css') }}"
             rel="stylesheet" />
-        <link href="{{ asset('admin/metismenu/css/metisMenu.min.css') }} " rel="stylesheet" />
+        <link href="{{ asset('assets/metismenu/css/metisMenu.min.css') }} " rel="stylesheet" />
         <!-- loader-->
-        <link href="{{ asset('admin/css/pace.min.css') }}" rel="stylesheet" />
-        <script src="{{ asset('admin/js/pace.min.js') }} "></script>
+        <link href="{{ asset('assets/css/pace.min.css') }}" rel="stylesheet" />
+        <script src="{{ asset('assets/js/pace.min.js') }} "></script>
         <!-- Bootstrap CSS -->
-        <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('admin/css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('admin/css/icons.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
         <title>{{ env('APP_NAME') }}</title>
     </head>
 
@@ -31,7 +31,7 @@
                     <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
                         <div class="col mx-auto">
                             <div class="mb-4 text-center">
-                                <img src="{{ asset('admin/images/logo.png') }}" width="180"
+                                <img src="{{ asset('assets/images/logo.png') }}" width="180"
                                     alt="" />
                             </div>
                             <div class="card">
@@ -86,12 +86,12 @@
         </div>
         <!--end wrapper-->
         <!-- Bootstrap JS -->
-        <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
         <!--plugins-->
-        <script src="{{ asset('admin/js/jquery.min.js') }} "></script>
-        <script src="{{ asset('admin/plugins/simplebar/js/simplebar.min.js') }}"></script>
-        <script src="{{ asset('admin/plugins/metismenu/js/metisMenu.min.js') }}"></script>
-        <script src="{{ asset('admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}">
+        <script src="{{ asset('assets/js/jquery.min.js') }} "></script>
+        <script src="{{ asset('assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}">
         </script>
         <!--Password show & hide js -->
         <script>
@@ -112,7 +112,7 @@
 
         </script>
         <!--app JS-->
-        <script src="{{ asset('admin/js/app.js') }}"></script>
+        <script src="{{ asset('assets/js/app.js') }}"></script>
     </body>
 
 </html>

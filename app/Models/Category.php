@@ -22,4 +22,14 @@ class Category extends Model
         }
 
     }
+
+    public static function checkDependentData($id){
+        if(Mail::where('category_id',$id)->count() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
 }

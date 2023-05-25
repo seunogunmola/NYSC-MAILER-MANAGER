@@ -103,13 +103,21 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
+        //CHECK IF CATEGORY HAS DATA
+        $hasData = Category::checkDependentData($id);
 
-        if($category->delete()){
-            return redirect(route('admin.category.list'))->with(['message'=>'Category Deleted Successfully','type'=>'success']);
+        if($hasData==true){
+            return redirect(route('admin.category.list'))->with(['message'=>'Category has Mails attached to it, it cannot be deleted','type'=>'error']);
         }
         else{
-            return back()->with(['message'=>'An Error Occured Please try again','type'=>'error']);
+            $category = Category::findOrFail($id);
+
+            if($category->delete()){
+                return redirect(route('admin.category.list'))->with(['message'=>'Category Deleted Successfully','type'=>'success']);
+            }
+            else{
+                return back()->with(['message'=>'An Error Occured Please try again','type'=>'error']);
+            }
         }
     }
 }

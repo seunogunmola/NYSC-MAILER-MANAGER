@@ -100,6 +100,9 @@ Route::middleware(['auth','role:admin'])->group(
                 Route::get('/admin/destinations/view','index')->name('admin.destinations.list');
 
                 Route::post('/admin/destinations/store','store')->name('admin.destinations.store');
+
+                Route::get('/admin/destinations/edit/{uniqueid}','edit')->name('admin.destinations.edit');
+                Route::post('admin/destinations/update/{id}','update')->name('admin.destinations.update');
             }
         );
 

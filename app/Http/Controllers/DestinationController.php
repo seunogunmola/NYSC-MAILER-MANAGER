@@ -84,9 +84,12 @@ class DestinationController extends Controller
      * @param  \App\Models\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function edit(Destination $destination)
+    public function edit($uniqueid)
     {
-        //
+        $destination = Destination::where('uniqueid',$uniqueid)->first();
+        $resource = $this->resource;
+        $pageTitle = "Edit Destination";
+        return view('admin.destinations.edit',compact('pageTitle','resource','destination'));        
     }
 
     /**
@@ -96,9 +99,27 @@ class DestinationController extends Controller
      * @param  \App\Models\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Destination $destination)
+    public function update(Request $request, $id)
     {
-        //
+        $destination = Destination::findOrFail($id);
+        $rules = [
+            'destination_name'=>'string|required',
+            'status'=>'numeric|required'
+        ];
+
+        $request->validate($rules);
+
+        $destination_data = [
+            'destination_name'=>$request->destination_name,
+            'status'=>$request->status,
+        ];
+
+        if ($destination->update($destination_data)){
+            return redirect(route('admin.destinations.list'))->with(['message'=>'Destination Updated Successfully','type'=>'success']);
+        }
+        else{
+            return back()->with(['message'=>'An error occured, Please try again','type'=>'error']);
+        }        
     }
 
     /**

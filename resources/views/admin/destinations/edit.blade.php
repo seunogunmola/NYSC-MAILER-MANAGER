@@ -1,65 +1,55 @@
 @extends('admin.layouts.main')
 @section('pageTitle',$pageTitle)
 @section('content')
-<div class="page-wrapper">
     <div class="page-content">
-        <!--breadcrumb-->
-        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">{{ $pageTitle }}</div>
-        </div>
-        <!--end breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">{{ $resource }}</div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $pageTitle }}</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="ms-auto">
+                <a href="{{ route('admin.destinations.list') }}" class="btn btn-primary">View All Destinations</a>
+            </div>
+        </div>        
+        <hr />        
         <div class="row">
             <div class="col-xl-9 mx-auto">
-                <h6 class="mb-0 text-uppercase">{{ $pageTitle }}</h6>
-                <hr />
-                <div class="card">
+                <div class="card">                    
                     <div class="card-body">
-                        @if($errors->any())
+                    <h6 class="mb-0 text-uppercase">{{ $pageTitle }}</h6>
+                    <hr />                        
+                    <!-- #All VALIDATION ERRORS -->
+                        @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
-                                    @foreach($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
                             </div>
-                        @endif
-                        <form action="{{ route('admin.mail.update',$mail->id) }}" method="post" enctype="multipart/form-data">
+                        @endif                        
+                        <form action="{{ route('admin.destinations.update',$destination->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
-                                <label for="formFile" class="form-label">Sender</label>
-                                <input name="sender" class="form-control" type="text" required value="{{ old('sender',$mail->sender) }}">
+                                <label for="Category Name" class="form-label">Destination Name</label>
+                                <input name="destination_name" class="form-control" type="text" required value="{{ $destination->destination_name}}">
                             </div>
                             <div class="mb-3">
-                                <label for="formFile" class="form-label">Subject</label>
-                                <input name="subject" class="form-control" type="text" required value="{{ old('subject',$mail->subject) }}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Description</label>
-                                <textarea name="description" class="form-control" required>{{ old('description',$mail->description) }}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Destination</label>
-                                <input name="destination" class="form-control" type="text" required value="{{ old('destination',$mail->destination) }}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Category</label>
-                                <select name="category" id="" class="form-select" required>
+                                <label for="Category Name" class="form-label">Destination Status</label>
+                                <select name="status" id="status" class="form-select">
                                     <option value="">Select Option</option>
-                                    @foreach ($categories as $key=>$value)
-                                        <option {{ $key==$mail->category ? "selected" : "" }} value="{{ $key }}">{{ $value }}</option>
-                                    @endforeach
+                                    <option {{ $destination->status == "1" ? "selected": "" }} value="1">Enabled</option>
+                                    <option {{ $destination->status == "0" ? "selected": "" }} value="0">Disabled</option>
                                 </select>
                             </div>
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Date Received</label>
-                                <input name="date" class="form-control" type="date" required value="{{ old('date',$mail->date) }}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">File</label>
-                                <input name="file" class="form-control" type="file" id="formFile" {{ isset($mail->file) ? "" : "required" }}>
-                            </div>
                             <div>
-                                <button class="btn btn-primary" type="submit"> Update <i class="bx bx-save"></i> </button>
+                                <button class="btn btn-primary" type="submit"> Save <i class="bx bx-save"></i> </button>
                                 <button class="btn btn-danger" type="reset">Reset</button>
                             </div>
                         </form>
@@ -70,5 +60,4 @@
         </div>
         <!--end row-->
     </div>
-</div>
 @endsection

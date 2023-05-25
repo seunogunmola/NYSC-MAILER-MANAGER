@@ -48,9 +48,7 @@
                                         <div class="dropdown">
 											<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Action</button>
 											<ul class="dropdown-menu" style="margin: 0px;">
-												<li><a class="dropdown-item" href="{{ route('admin.category.edit',$destination->uniqueid)}}">Edit </a>
-												</li>
-												<li><a class="dropdown-item" href="{{ route('admin.category.delete',$destination->id) }}" id="#delete">Delete</a>
+												<li><a class="dropdown-item" href="{{ route('admin.destinations.edit',$destination->uniqueid)}}">Edit </a>
 												</li>
 											</ul>
 										</div>                                        

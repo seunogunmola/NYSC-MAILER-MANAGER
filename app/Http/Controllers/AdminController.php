@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Models\Category;
 use App\Models\Mail;
+use App\Models\Destination;
 
 class AdminController extends Controller
 {
@@ -14,8 +15,8 @@ class AdminController extends Controller
         $pageTitle = "Admin Dashboard";
         $mails = Mail::count();
         $categories = Category::count();
-        
-        return view('admin.dashboard',compact('pageTitle','mails','categories'));
+        $destinations = Destination::count();
+        return view('admin.dashboard',compact('pageTitle','mails','categories','destinations'));
     }
 
     public function login(){

@@ -73,7 +73,7 @@
                             <th>Destination</th>
                             <th>Category</th>
                             <th>Date</th>
-                            <th>File</th>
+                            <!-- <th>File</th> -->
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -92,7 +92,7 @@
                             <td>{{ $mail->destination->destination_name }}</td>
                             <td>{{ $mail->category->category_name }}</td>
                             <td>{{ $mail->date }}</td>
-                            <td> <a href="{{ asset($mail->file) }}" class="bx bx-envelope-open" title="View Mail" target="blank"></a></td>
+                            <!-- <td> <a href="{{ asset($mail->file) }}" class="bx bx-envelope-open" title="View Mail" target="blank"></a></td> -->
                             <td>
                                 @switch($mail->status)
                                 @case("0")
@@ -131,7 +131,7 @@
                             <th>Destination</th>
                             <th>Category</th>
                             <th>Date</th>
-                            <th>File</th>
+                            <!-- <th>File</th> -->
                             <th>Status</th>
                             <th>Action</th>
                         </tr>

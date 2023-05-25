@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Destination;
 use App\Models\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 
 class MailController extends Controller
@@ -13,12 +15,13 @@ class MailController extends Controller
     public $resource = "Mail";
 
     public $categories;
+    public $destinations;
 
     public  $rules = [
         'sender'=>'string|required',
         'subject'=>'string|required',
         'description'=>'string|required',
-        'destination'=>'string|required',
+        'destination_id'=>'string|required',
         'category_id'=>'string|required',
         'date'=>'date|required',
         'file'=>'file',
@@ -27,9 +30,10 @@ class MailController extends Controller
     public function __construct()
     {
         $this->categories = Category::all();
+        $this->destinations = Destination::all();
     }
 
-    public function index()
+    public function index(Request $request)
     {
         #SET PAGE TITLE    
         $action = "View Mails";
@@ -37,10 +41,30 @@ class MailController extends Controller
         $pageTitle = $resource.' | '.$action;
 
         $categories = $this->categories;
-        #GET MAIL
-        $mails = Mail::all();
+        $destinations = $this->destinations;
 
-        return view('admin.mail.index',compact('resource','action','pageTitle','mails','categories'));
+        $where = [];
+        $destination_id = $request->destination_id;
+        $category_id = $request->category_id;
+        $status = $request->status;
+        $sender = $request->sender;
+        if(isset($request->destination_id) && $request->destination_id !== "all"){
+            $where['destination_id'] = $destination_id;
+        }
+        if(isset($category_id) && $category_id !== "all"){
+            $where['category_id'] = $category_id;
+        }
+        if(isset($status) && $status !== "all"){
+            $where['status'] = $status;
+        }
+        if(isset($sender) && $sender !== ""){
+            $where['sender'] = $sender;
+        }
+
+        #GET MAILS        
+        $mails = Mail::where($where)->get();
+        
+        return view('admin.mail.index',compact('resource','action','pageTitle','mails','categories','destinations'));
     }
 
     /**
@@ -50,9 +74,11 @@ class MailController extends Controller
      */
     public function create()
     {
+        $resource = $this->resource;
         $pageTitle = "Create Mail";
         $categories = $this->categories;
-        return view('admin.mail.create',compact('pageTitle','categories'));    
+        $destinations = $this->destinations;
+        return view('admin.mail.create',compact('pageTitle','categories','resource','destinations'));    
     }
 
     /**
@@ -72,8 +98,8 @@ class MailController extends Controller
                 'uniqueid'=>str()->random(7),
                 'sender'=>$request->sender,
                 'subject'=>$request->subject,
-                'description'=>$request->sender,
-                'destination'=>$request->sender,
+                'description'=>$request->description,
+                'destination_id'=>$request->destination_id,
                 'category_id'=>$request->category_id,
                 'date'=>$request->date,
                 'received_by'=>Auth::user()->id,
@@ -132,7 +158,8 @@ class MailController extends Controller
         if($mail){
             $pageTitle = "Edit Mail : ".$mail->description;
             $categories = $this->categories;
-            return view('admin.mail.edit',compact('pageTitle','categories','mail'));           
+            $destinations = $this->destinations;
+            return view('admin.mail.edit',compact('pageTitle','categories','mail','destinations'));           
         }
         else{
             return redirect()->route('admin.mail.index');
@@ -158,13 +185,15 @@ class MailController extends Controller
             $mail_data = [
                 'sender'=>$request->sender,                
                 'subject'=>$request->subject,
-                'description'=>$request->sender,
-                'destination'=>$request->sender,
+                'description'=>$request->description,
+                'destination_id'=>$request->destination_id,
                 'category_id'=>$request->category_id,
                 'date'=>$request->date,
-                'updated_by'=>Auth::user()->id,
-                'updated_at'=>date('Y-m-d h:i:s'),
+                // 'updated_at'=>date('Y-m-d h:i:s'),
+                'status'=>$request->status
             ];
+
+
             if($uploadedFile = $request->file){
                 $extention = $uploadedFile->getClientOriginalExtension();                
                 $filename = hexdec(uniqid()).'.'.$extention;                
@@ -209,5 +238,11 @@ class MailController extends Controller
         else{
             return back()->with(['message'=>'An Error Occured','type'=>'error']);
         }
+    }
+
+    public function view($uniqueid){
+        $pageTitle = "View Mail";
+        $mail = Mail::where('uniqueid',$uniqueid)->first();
+        return view('admin.mail.view',compact('mail','pageTitle'));
     }
 }

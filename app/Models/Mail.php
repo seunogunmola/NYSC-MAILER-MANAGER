@@ -10,20 +10,13 @@ class Mail extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'subject',
-        'uniqueid',
-        'sender',
-        'description',
-        'destination',
-        'date',
-        'file',
-        'status',
-        'received_by',
-        'category_id'
-    ];
+    protected $guarded = [];
 
     public function category(){
         return $this->belongsTo(Category::class,'category_id','id');
+    }
+
+    public function destination(){
+        return $this->belongsTo(Destination::class,'destination_id','id');
     }
 }

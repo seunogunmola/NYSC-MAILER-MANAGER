@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\OperationController;
 use App\Http\Controllers\VendorController;
@@ -48,19 +49,23 @@ Route::middleware(['auth','role:admin'])->group(
         #MAILS
         Route::controller(MailController::class)->group(
             function(){
+                //ALL MAILS
+                Route::get('admin/mail/index','index')->name('admin.mail.index'); 
+
                 // EDIT MAIL 
                 Route::get('/admin/mail/edit/{uniqueid}','edit')->name('admin.mail.edit');
 
                 // UPDATE MAIL
                 Route::post('/admin/mail/update/{id}','update')->name('admin.mail.update'); 
-
-                Route::get('admin/mail/index','index')->name('admin.mail.index');        
+                       
                 //SHOW MAIL CREATION FORM
                 Route::get('admin/mail/create','create')->name('admin.mail.create');
                 //STORE MAIL
                 Route::post('admin/mail/store','store')->name('admin.mail.store');     
                 
                 Route::get('/admin/mail/delete/{id}','destroy')->name('admin.mail.delete');
+
+                Route::get('/admin/main/view/{uniqueid}','view')->name('admin.mail.view');
             }
         );
 
@@ -82,6 +87,16 @@ Route::middleware(['auth','role:admin'])->group(
             function(){
                 Route::get('/admin/operations/upload','excel')->name('admin.excel.upload');
                 Route::post('/admin/operation/storeExcel','storeExcel')->name('admin.excel.store');
+            }
+        );
+
+        #DESTINATIONS
+        Route::controller(DestinationController::class)->group(
+            function(){
+                Route::get('/admin/destinations/create','create')->name('admin.destinations.create');
+                Route::get('/admin/destinations/view','index')->name('admin.destinations.list');
+
+                Route::post('/admin/destinations/store','store')->name('admin.destinations.store');
             }
         );
 

@@ -1,15 +1,19 @@
 @extends('admin.layouts.main')
 @section('pageTitle',$pageTitle)
 @section('content')
+<div class="page-wrapper">
     <div class="page-content">
+        <!--breadcrumb-->
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">{{ $pageTitle }}</div>
+        </div>
         <!--end breadcrumb-->
         <div class="row">
-        <div class="col-xl-9 mx-auto">
-
+            <div class="col-xl-9 mx-auto">
+                <h6 class="mb-0 text-uppercase">{{ $pageTitle }}</h6>
+                <hr />
                 <div class="card">
                     <div class="card-body">
-                    <h6 class="mb-0 text-uppercase">{{ $pageTitle }}</h6>
-                <hr />
                         @if($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -35,19 +39,14 @@
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Destination</label>
-                                <select name="destination_id" id="" class="form-select" required>
-                                    <option value="">Select Option</option>
-                                    @foreach ($destinations as $destination)
-                                        <option {{ $mail->destination_id == $destination->id ? "selected" : "" }} value="{{ $destination->id }}">{{ $destination->destination_name }}</option>
-                                    @endforeach
-                                </select>                                   
+                                <input name="destination" class="form-control" type="text" required value="{{ old('destination',$mail->destination) }}">
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Category</label>
-                                <select name="category_id" id="" class="form-select" required>
+                                <select name="category" id="" class="form-select" required>
                                     <option value="">Select Option</option>
-                                    @foreach ($categories as $category)
-                                        <option {{ $category->id == $mail->category_id ? "selected" : "" }} value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                    @foreach ($categories as $key=>$value)
+                                        <option {{ $key==$mail->category ? "selected" : "" }} value="{{ $key }}">{{ $value }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -59,15 +58,6 @@
                                 <label for="formFile" class="form-label">File</label>
                                 <input name="file" class="form-control" type="file" id="formFile" {{ isset($mail->file) ? "" : "required" }}>
                             </div>
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Status</label>
-                                <select name="status" id="status" class="form-select">
-                                    <option value=""></option>
-                                    <option {{ $mail->status === "0" ? "selected": "" }} value="0">Pending</option>
-                                    <option {{ $mail->status === "1" ? "selected": "" }}  value="1">Away</option>
-                                </select>
-                            </div>
-
                             <div>
                                 <button class="btn btn-primary" type="submit"> Update <i class="bx bx-save"></i> </button>
                                 <button class="btn btn-danger" type="reset">Reset</button>
@@ -80,4 +70,5 @@
         </div>
         <!--end row-->
     </div>
+</div>
 @endsection

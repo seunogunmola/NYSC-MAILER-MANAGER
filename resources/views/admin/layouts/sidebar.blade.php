@@ -47,6 +47,17 @@
         </li>
         <li>
             <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-box'></i>
+                </div>
+                <div class="menu-title">Manage Destinations</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('admin.destinations.list') }}"><i class="bx bx-right-arrow-alt"></i>View Destinations</a> </li>
+                <li> <a href="{{ route('admin.destinations.create') }}"><i class="bx bx-right-arrow-alt"></i>Create Destinations</a> </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-slider-alt'></i>
                 </div>
                 <div class="menu-title">Operations</div>

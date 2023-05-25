@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('sender');
             $table->text('subject');            
             $table->text('description');            
-            $table->string('destination');
+            $table->unsignedBigInteger('destination_id');
             $table->unsignedBigInteger('category_id');
             $table->string('date');
             $table->text('file');

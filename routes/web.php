@@ -26,7 +26,7 @@ Route::get('/', function () {
     return view('/admin/login',compact('pageTitle'));
 });
 
-Route::get('/dashboard',[DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -39,8 +39,9 @@ require __DIR__.'/auth.php';
 
 
 //ADMIN 
-Route::middleware(['auth','role:admin'])->group(
+Route::middleware(['auth','role:admin'])->group(    
     function(){
+        Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
         #Admin Routes
         Route::get('/admin/dashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
         

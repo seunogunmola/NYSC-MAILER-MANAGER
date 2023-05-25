@@ -87,6 +87,8 @@ Route::middleware(['auth','role:admin'])->group(
             function(){
                 Route::get('/admin/operations/upload','excel')->name('admin.excel.upload');
                 Route::post('/admin/operation/storeExcel','storeExcel')->name('admin.excel.store');
+
+                Route::get('/admin/operation/backup','backup')->name('admin.database.backup')->name('admin.database.backup');
             }
         );
 

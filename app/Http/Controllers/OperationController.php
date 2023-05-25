@@ -49,4 +49,8 @@ class OperationController extends Controller
         return redirect(route('admin.mail.index'))->with(['message'=>$count . " Mails Imported Successfully",'type'=>'success']);
 
     }
+
+    public function backup(){
+        
+    }
 }

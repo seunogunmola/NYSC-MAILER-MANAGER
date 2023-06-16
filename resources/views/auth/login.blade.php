@@ -74,6 +74,8 @@
                                                     </div>
                                                 </div>
                                             </form>
+                                            <br>
+                                            Not an User? <a href="{{ route('admin.login') }}">Login as a Admin</a>                                                                                            
                                         </div>
                                     </div>
                                 </div>

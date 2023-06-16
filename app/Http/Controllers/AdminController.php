@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Models\Category;
 use App\Models\Mail;
 use App\Models\Destination;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -16,7 +17,9 @@ class AdminController extends Controller
         $mails = Mail::count();
         $categories = Category::count();
         $destinations = Destination::count();
-        return view('admin.dashboard',compact('pageTitle','mails','categories','destinations'));
+        $users = User::count();
+        $recentMails = Mail::latest()->limit(10)->get();
+        return view('admin.dashboard',compact('pageTitle','mails','categories','destinations','users','recentMails'));
     }
 
     public function login(){

@@ -8,6 +8,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Destination;
 
 class UserController extends Controller
 {
@@ -20,13 +21,15 @@ class UserController extends Controller
 
     public function create(){
         $pageTitle = "Create User";
-        return view('admin.users.create',compact('pageTitle'));
+        $departments = Destination::all();
+        return view('admin.users.create',compact('pageTitle','departments'));
     }
     public function edit($uniqueid){        
         $user = User::where('uniqueid',$uniqueid)->first();
         $pageTitle = "Editing User : ".$user->name;
         if($user){
-            return view('admin.users.edit',compact('user','pageTitle'));
+            $departments = Destination::all();
+            return view('admin.users.edit',compact('user','pageTitle','departments'));
         }
         else{
             return redirect()->route('admin.users.all')->with(['message'=>'User Not Found','alert-type'=>'error']);
@@ -43,6 +46,10 @@ class UserController extends Controller
             $data = $request->validated();
             $data['uniqueid'] = str()->random('7');            
             $data['password'] = Hash::make($data['password']);
+            if(isset($request->department_id)){
+                $data['department_id'] = $request->department_id;
+            }
+            
             $created = User::create($data);
 
             if($created){
@@ -59,10 +66,12 @@ class UserController extends Controller
 
         if($request->validated()){
             $data = $request->validated();
-
             if(isset($data['password']))  {
                 $data['password'] = Hash::make($data['password']);
             }     
+            if(isset($request->department_id)){
+                $data['department_id'] = $request->department_id;
+            }            
              
             $updated = $user->update($data);
 

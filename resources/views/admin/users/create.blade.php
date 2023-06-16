@@ -46,6 +46,16 @@
                                 </select>
                             </div>
                             <div class="mb-3">
+                                <label for="Category Name" class="form-label">Department (For Non Admin Users)</label>
+                                <select name="department_id" id="status" class="form-select" >
+                                    <option value="">Select Department</option>
+                                    @foreach ($departments as $department)
+                                    <option value="{{ $department->id }}">{{ $department->destination_name}}</option>    
+                                    @endforeach
+                                    
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label for="Category Name" class="form-label">Password</label>
                                 <input type="password" class="form-control" name="password" required placeholder="Password">
                             </div>

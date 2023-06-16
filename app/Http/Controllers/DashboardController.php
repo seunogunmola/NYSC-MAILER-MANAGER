@@ -14,6 +14,7 @@ class DashboardController extends Controller
         $mails = Mail::count();
         $categories = Category::count();
         $destinations = Destination::count();
-        return view('admin.dashboard',compact('pageTitle','mails','categories','destinations'));
+        $recentMails = Mail::latest()->get();
+        return view('user.dashboard',compact('pageTitle','mails','categories','destinations','recentMails'));
     }
 }

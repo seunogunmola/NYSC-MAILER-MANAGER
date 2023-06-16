@@ -37,12 +37,21 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
+#USERS
+Route::middleware(['auth','role:user'])->group(
+    function(){
+        Route::controller(UserController::class)->group(
+            function(){
+                Route::get('logout','logout')->name('user.logout');
+                Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+            }
+        );        
+    }
+);
 
 //ADMIN 
 Route::middleware(['auth','role:admin'])->group(    
-    function(){
-        Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+    function(){        
         #Admin Routes
         Route::get('/admin/dashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
         

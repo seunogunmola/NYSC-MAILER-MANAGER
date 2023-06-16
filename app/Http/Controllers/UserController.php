@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -72,5 +73,15 @@ class UserController extends Controller
                 return back()->with(['message'=>'An Error Occured','alert-type'=>'error']);
             }
         }        
+    }
+
+    public function logout(Request $request){
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');        
     }
 }

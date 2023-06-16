@@ -35,7 +35,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="Category Name" class="form-label">Phone Number</label>
-                                <input name="phone" class="form-control" type="text" required value="{{ old('phone') }}">
+                                <input name="phone" class="form-control" type="text" required value="{{ old('phone') }}" maxlength="11">
                             </div>
                             <div class="mb-3">
                                 <label for="Category Name" class="form-label">Role</label>

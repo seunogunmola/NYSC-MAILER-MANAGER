@@ -66,6 +66,17 @@
                 <li> <a href="{{ route('admin.excel.upload') }}"><i class="bx bx-upload"></i>Upload from Excel</a> </li>                
             </ul>
         </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-user'></i>
+                </div>
+                <div class="menu-title">Manager Users</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('admin.users.all') }}"><i class="bx bx-zoom-in"></i>View Users</a> </li>                
+                <li> <a href="{{ route('admin.users.create') }}"><i class="bx bx-user-plus"></i>Create Users</a> </li>                
+            </ul>
+        </li>
         <li> <a href="{{ route('admin.logout') }}" onclick="return confirm('Are You Sure?')"><i class="bx bx-logout"></i>Logout</a> </li>                
     </ul>
     <!--end navigation-->

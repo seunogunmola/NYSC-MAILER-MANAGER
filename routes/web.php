@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\OperationController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 
 /*
@@ -105,6 +106,20 @@ Route::middleware(['auth','role:admin'])->group(
 
                 Route::get('/admin/destinations/edit/{uniqueid}','edit')->name('admin.destinations.edit');
                 Route::post('admin/destinations/update/{id}','update')->name('admin.destinations.update');
+            }
+        );
+
+        #USERS
+        Route::controller(UserController::class)->group(
+            function(){
+                Route::get('/admin/users','index')->name('admin.users.all');
+                Route::get('/admin/users/create','create')->name('admin.users.create');
+
+                Route::get('/admin/users/edit/{uniqueid}','edit')->name('admin.users.edit');
+                Route::get('/admin/users/delete/{id}','delete')->name('admin.users.delete');
+
+                Route::post('/admin/users','store')->name('admin.users.store');
+                Route::post('/admin/users/update/{id}','update')->name('admin.users.update');
             }
         );
 

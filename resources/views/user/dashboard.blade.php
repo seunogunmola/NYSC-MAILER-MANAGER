@@ -3,7 +3,12 @@
 @section('content')
 <!--start page wrapper -->
     <div class="page-content">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
+        <div>
+            <h4>Welcome, {{ $user->name }}</h4>
+            <h6>{{ $user->department->destination_name }}</h6>
+        </div>
+        <hr>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">            
             <div class="col">
                 <a href="{{ route('admin.mail.index'); }}">
                     <div class="card radius-10 bg-gradient-deepblue">

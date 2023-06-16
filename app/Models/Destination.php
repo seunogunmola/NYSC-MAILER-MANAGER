@@ -9,4 +9,8 @@ class Destination extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 }

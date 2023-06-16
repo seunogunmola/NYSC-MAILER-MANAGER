@@ -103,7 +103,10 @@ class MailController extends Controller
                 'category_id'=>$request->category_id,
                 'date'=>$request->date,
                 'received_by'=>Auth::user()->id,
-                'status'=>'0'
+                'status'=>'0',
+                'reference_no'=>$request->reference_no,
+                'remarks'=>$request->remarks,
+                'date_minuted'=>$request->date_minuted
             ];
 
             if($uploadedFile = $request->file){
@@ -190,7 +193,11 @@ class MailController extends Controller
                 'category_id'=>$request->category_id,
                 'date'=>$request->date,
                 // 'updated_at'=>date('Y-m-d h:i:s'),
-                'status'=>$request->status
+                'status'=>$request->status,
+                'reference_no'=>$request->reference_no,
+                'remarks'=>$request->remarks,
+                'date_minuted'=>$request->date_minuted
+                
             ];
 
 

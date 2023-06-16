@@ -36,12 +36,16 @@
                         <form action="{{ route('admin.mail.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
+                                <label for="formFile" class="form-label">Reference Number</label>
+                                <input name="reference_no" class="form-control" type="text" required value="{{ old('reference_no') }}" placeholder="Enter Reference Number">
+                            </div>
+                            <div class="mb-3">
                                 <label for="formFile" class="form-label">Sender</label>
-                                <input name="sender" class="form-control" type="text" required value="{{ old('sender') }}">
+                                <input name="sender" class="form-control" type="text" required value="{{ old('sender') }}" placeholder="Enter Sender Name">
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Subject</label>
-                                <input name="subject" class="form-control" type="text" required value="{{ old('subject') }}">
+                                <input name="subject" class="form-control" type="text" required value="{{ old('subject') }}" placeholder="Enter Subject">
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Description</label>
@@ -78,6 +82,14 @@
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">File</label>
                                 <input name="file" class="form-control" type="file" id="formFile" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Other Remarks</label>
+                                <textarea name="remarks" class="form-control" >{{ old('remarks') }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Date Minuted Out</label>
+                                <input name="date_minuted" class="form-control" type="date"  value="{{ old('date_minuted') }}">
                             </div>
                             <div>
                                 <button class="btn btn-primary" type="submit"> Save <i class="bx bx-save"></i> </button>

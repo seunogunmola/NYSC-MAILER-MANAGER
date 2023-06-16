@@ -72,7 +72,8 @@
                             <!-- <th>Description</th> -->
                             <th>Destination</th>
                             <th>Category</th>
-                            <th>Date</th>
+                            <th>Date Received</th>
+                            <th>Date Minuted</th>
                             <!-- <th>File</th> -->
                             <th>Status</th>
                             <th>Action</th>
@@ -92,6 +93,7 @@
                             <td>{{ $mail->destination->destination_name }}</td>
                             <td>{{ $mail->category->category_name }}</td>
                             <td>{{ $mail->date }}</td>
+                            <td>{{ $mail->date_minuted }}</td>
                             <!-- <td> <a href="{{ asset($mail->file) }}" class="bx bx-envelope-open" title="View Mail" target="blank"></a></td> -->
                             <td>
                                 @switch($mail->status)
@@ -130,7 +132,8 @@
                             <!-- <th>Description</th> -->
                             <th>Destination</th>
                             <th>Category</th>
-                            <th>Date</th>
+                            <th>Date Received</th>
+                            <th>Date Minuted</th>
                             <!-- <th>File</th> -->
                             <th>Status</th>
                             <th>Action</th>

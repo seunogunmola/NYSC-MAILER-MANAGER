@@ -22,6 +22,10 @@
                         <form action="{{ route('admin.mail.update',$mail->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
+                                <label for="formFile" class="form-label">Reference Number</label>
+                                <input name="reference_no" class="form-control" type="text" required value="{{ old('reference_no',$mail->reference_no) }}" placeholder="Enter Reference Number">
+                            </div>
+                            <div class="mb-3">
                                 <label for="formFile" class="form-label">Sender</label>
                                 <input name="sender" class="form-control" type="text" required value="{{ old('sender',$mail->sender) }}">
                             </div>
@@ -58,6 +62,14 @@
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">File</label>
                                 <input name="file" class="form-control" type="file" id="formFile" {{ isset($mail->file) ? "" : "required" }}>
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Other Remarks</label>
+                                <textarea name="remarks" class="form-control" >{{ old('description',$mail->remarks) }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Date Minuted Out</label>
+                                <input name="date_minuted" class="form-control" type="date"  value="{{ old('date_minuted') }}">
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Status</label>

@@ -10,7 +10,7 @@
         <hr>
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">            
             <div class="col">
-                <a href="{{ route('admin.mail.index'); }}">
+                <a href="">
                     <div class="card radius-10 bg-gradient-deepblue">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -59,7 +59,7 @@
                                 <td>{{ $index+1 }}</td>
                                 <td>{{ $mail->sender }}</td>
                                 <td> 
-                                    <a href="{{ route('admin.mail.view',$mail->uniqueid) }}" target="_blank">
+                                    <a href="{{ route('user.mail.view',$mail->uniqueid) }}" target="_blank">
                                         {{ substr($mail->subject,0,50) }}...
                                     </a>
                                 </td>
@@ -86,12 +86,8 @@
                                     <div class="dropdown">
                                         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Action</button>
                                         <ul class="dropdown-menu" style="margin: 0px;">
-                                            <li><a target="_blank" class="dropdown-item" href="{{ route('admin.mail.view',$mail->uniqueid) }}" target="_blank">View Mail</a>
-                                            </li>
-                                            <li><a class="dropdown-item" href="{{ route('admin.mail.edit',$mail->uniqueid)}}">Edit Mail</a>
-                                            </li>
-                                            <li><a class="dropdown-item" href="{{ route('admin.mail.delete',$mail->id) }}" id="delete">Delete Mail</a>
-                                            </li>
+                                            <li><a target="_blank" class="dropdown-item" href="{{ route('user.mail.view',$mail->uniqueid) }}" target="_blank">View Mail</a>
+                                            </li>                                            
                                         </ul>
                                     </div>
                                 </td>

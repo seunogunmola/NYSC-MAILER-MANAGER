@@ -44,7 +44,10 @@ Route::middleware(['auth','role:user'])->group(
             function(){
                 Route::get('logout','logout')->name('user.logout');
                 Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+
+                Route::get('/mail/view/{uniqueid}','viewMail')->name('user.mail.view');
             }
+            
         );        
     }
 );

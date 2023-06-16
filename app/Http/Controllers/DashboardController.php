@@ -15,7 +15,7 @@ class DashboardController extends Controller
         $pageTitle = "Dashboard";        
         $categories = Category::count();
         $destinations = Destination::count();
-        $recentMails = Mail::where('destination_id',$user->department_id)->get();
+        $recentMails = Mail::where(['destination_id'=>$user->department_id,'status'=>'1'])->get();
         $mails = count($recentMails);
         return view('user.dashboard',compact('pageTitle','mails','categories','destinations','recentMails','user'));
     }

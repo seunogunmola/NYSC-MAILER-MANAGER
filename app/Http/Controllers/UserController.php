@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Destination;
+use App\Models\Mail;
 
 class UserController extends Controller
 {
@@ -92,5 +93,11 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login');        
+    }
+
+    public function viewMail($uniqueid){
+        $pageTitle = "View Mail";
+        $mail = Mail::where('uniqueid',$uniqueid)->first();
+        return view('user.mail.view',compact('mail','pageTitle'));
     }
 }

@@ -51,7 +51,7 @@
                             <select name="status" class="form-select mb-3" aria-label="Default select example">
                                 <option value="all">All</option>
                                 <option value="0">Pending</option>
-                                <option value="1">Away</option>
+                                <option value="1">Minuted Out</option>
                             </select>
                         </div>
                     </div>
@@ -119,7 +119,8 @@
                                                         target="_blank">View Mail</a>
                                                 </li>
                                                 <li><a class="dropdown-item"
-                                                        href="{{ route('admin.mail.edit', $mail->uniqueid) }}">Edit Mail</a>
+                                                        href="{{ route('admin.mail.edit', $mail->uniqueid) }}">Edit
+                                                        Mail</a>
                                                 </li>
                                                 <li><a class="dropdown-item"
                                                         href="{{ route('admin.mail.delete', $mail->id) }}"

@@ -33,6 +33,22 @@
         </li>
         <li>
             <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-file'></i>
+                </div>
+                <div class="menu-title">Working Files</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('admin.files.create') }}"><i class="bx bx-right-arrow-alt"></i>Upload Working
+                        File
+                    </a>
+                </li>
+                <li> <a href="{{ route('admin.files.index') }}"><i class="bx bx-right-arrow-alt"></i>View Working
+                        Files</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-user'></i>
                 </div>
                 <div class="menu-title">Sender Categories</div>
@@ -64,7 +80,8 @@
                 <div class="menu-title">Operations</div>
             </a>
             <ul>
-                <li> <a href="{{ route('admin.excel.upload') }}"><i class="bx bx-upload"></i>Upload from Excel</a> </li>
+                <li> <a href="{{ route('admin.excel.upload') }}"><i class="bx bx-upload"></i>Upload from Excel</a>
+                </li>
             </ul>
         </li>
         <li>

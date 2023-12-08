@@ -15,4 +15,9 @@ class File extends Model
         'file_url',
         'uploaded_by'
     ];
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'uploaded_by', 'id');
+    }
 }

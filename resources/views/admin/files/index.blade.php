@@ -29,6 +29,7 @@
                                     <th>#</th>
                                     <th>Title</th>
                                     <th>Description</th>
+                                    <th>Uploaded By</th>
                                     <th>Date Uploaded</th>
                                     <th>Action</th>
                                 </tr>
@@ -44,6 +45,7 @@
                                                 target="_blank">{{ $file->title }}</a>
                                         </td>
                                         <td>{{ $file->description }}</td>
+                                        <td>{{ $file->owner->name }}</td>
                                         <td>{{ $file->created_at }}</td>
                                         <td>
                                             <div class="dropdown">
@@ -74,6 +76,7 @@
                                     <th>#</th>
                                     <th>Title</th>
                                     <th>Description</th>
+                                    <th>Uploaded By</th>
                                     <th>Date Uploaded</th>
                                     <th>Action</th>
                                 </tr>

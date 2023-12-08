@@ -23,6 +23,10 @@
                             <td>{{ $file->description }}</td>
                         </tr>
                         <tr>
+                            <td>Uploaded By</td>
+                            <td>{{ $file->owner->name }}</td>
+                        </tr>
+                        <tr>
                             <td>Date Uploaded</td>
                             <td>{{ $file->created_at }}</td>
                         </tr>

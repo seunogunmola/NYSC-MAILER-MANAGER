@@ -70,7 +70,7 @@
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-user'></i>
                 </div>
-                <div class="menu-title">Manage Users</div>
+                <div class="menu-title">Managegit Users</div>
             </a>
             <ul>
                 <li> <a href="{{ route('admin.users.all') }}"><i class="bx bx-zoom-in"></i>View Users</a> </li>                
